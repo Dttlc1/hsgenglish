@@ -38,7 +38,7 @@
       color: transparent;
     }
 
-    /* 2. CỘT DỌC TỪ KHÓA (Màu nổi bật riêng biệt như ảnh mẫu gameshow) */
+    /* 2. CỘT DỌC TỪ KHÓA (Màu Đỏ nổi bật riêng biệt) */
     .cw-vertical-hidden {
       background: linear-gradient(145deg, #dc2626, #991b1b);
       border: 2.5px solid #fca5a5;
@@ -46,12 +46,12 @@
       box-shadow: 0 0 14px rgba(239, 68, 68, 0.55);
     }
 
-    /* 3. HÀNG ĐANG ĐƯỢC CHỌN (Chuyển sang màu Vàng Cam / Xanh Ngọc rực rỡ) */
+    /* 3. HÀNG ĐANG ĐƯỢC CHỌN (Chuyển sang màu Vàng Cam rực rỡ) */
     .cw-active-row {
       background: linear-gradient(145deg, #f59e0b, #d97706);
       border: 2px solid #fef08a;
       color: transparent;
-      box-shadow: 0 0 12px rgba(245, 158, 11, 0.45);
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.55);
       transform: scale(1.03);
     }
     /* Giao điểm giữa Cột Dọc Từ Khóa và Hàng Đang Chọn */
@@ -105,8 +105,8 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-extrabold text-sm md:text-base text-white tracking-tight">PHẦN 2: VƯỢT CHƯỚNG NGẠI VẬT (OBSTACLE COURSE)</span>
-            <span class="px-2 py-0.5 rounded bg-rose-500/20 border border-rose-400/40 text-rose-300 text-[11px] font-bold">
-              GIAO DIỆN Ô CHỮ HÀNG DỌC
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[11px] font-bold">
+              ĐỘI THI LUÂN PHIÊN CHỌN HÀNG
             </span>
           </div>
           <p class="text-[11px] text-slate-400">Cuộc thi Học sinh Lào Cai giỏi tiếng Anh cấp TH, THCS, THPT năm học 2026–2027</p>
@@ -144,27 +144,27 @@
             Trải Nghiệm Nhanh Cho Ban Tổ Chức (1-Click)
           </h1>
           <p class="text-xs text-blue-200 leading-relaxed">
-            Hệ thống đã cập nhật giao diện <strong>Từ khóa Hàng Dọc nổi bật</strong> thẳng cột và đổi màu trực quan theo từng hàng ngang được chọn. Bấm chọn nhanh vai trò để trải nghiệm ngay:
+            Đã cập nhật đúng thể lệ: <strong>Các đội thi luân phiên chọn hàng ngang</strong> (hoặc Ban Tổ chức/MC chọn hỗ trợ khi cần). Hàng được chọn sẽ lập tức đổi sang màu vàng cam nổi bật!
           </p>
 
           <div class="space-y-2.5 pt-2">
             <button onclick="quickDemoLogin('ADMIN')" class="w-full py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs text-left flex items-center justify-between shadow-lg transition">
-              <span>1. Vào vai MC / Ban Tổ Chức (Điều khiển ô chữ)</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </button>
-            <button onclick="quickDemoLogin('JUDGE')" class="w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs text-left flex items-center justify-between shadow-lg transition">
-              <span>2. Vào vai Ban Giám Khảo (Chấm từ khóa)</span>
+              <span>1. Vào vai MC / Ban Tổ Chức (Điều hành & Lật ô chữ)</span>
               <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
             <button onclick="quickDemoLogin('TEAM_1')" class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs text-left flex items-center justify-between shadow-lg transition">
-              <span>3. Vào vai Đội Thi 01 (Nhập đáp án & Bấm chuông)</span>
+              <span>2. Vào vai Đội Thi 01 (Chọn hàng, Nhập đáp án & Chuông)</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+            <button onclick="quickDemoLogin('JUDGE')" class="w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs text-left flex items-center justify-between shadow-lg transition">
+              <span>3. Vào vai Ban Giám Khảo (Chấm từ khóa)</span>
               <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
           </div>
         </div>
 
         <div class="pt-5 text-[11px] text-slate-400 border-t border-white/10 mt-6">
-          Mẹo: Mở trang này trên 2 tab trình duyệt (1 tab MC, 1 tab Đội 01) để xem đồng bộ tức thì!
+          Mẹo: Mở trang này trên 2 tab trình duyệt (1 tab MC, 1 tab Đội 01) để thử nghiệm đồng bộ!
         </div>
       </div>
 
@@ -228,9 +228,9 @@
         <div class="flex flex-wrap items-center gap-2">
           <span class="px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-black text-xs uppercase">Bàn Điều Khiển MC / BTC</span>
           <select id="admin-demo-preset" onchange="adminLoadDemoPreset()" class="rounded-lg bg-indigo-950 border border-indigo-600 px-3 py-1.5 text-xs font-bold text-amber-300">
-            <option value="THPT">Đề Demo THPT (20s - Từ khóa dọc: SA PA)</option>
-            <option value="THCS">Đề Demo THCS (20s - Từ khóa dọc: BROCADE)</option>
-            <option value="TH">Đề Demo Tiểu học (30s - Từ khóa dọc: RICE)</option>
+            <option value="THPT">Đề Demo THPT (20s - Từ khóa dọc: LAOCAI)</option>
+            <option value="THCS">Đề Demo THCS (20s - Từ khóa dọc: MARKET)</option>
+            <option value="TH">Đề Demo Tiểu học (30s - Từ khóa dọc: WINTER)</option>
           </select>
         </div>
 
@@ -247,18 +247,55 @@
         </div>
       </div>
 
-      <!-- Các nút điều khiển 6 hàng ngang -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2" id="admin-row-buttons">
-        <button onclick="adminSelectRow(0)" id="btn-admin-row-0" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">1. Chọn Hàng 1</button>
-        <button onclick="adminSelectRow(1)" id="btn-admin-row-1" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">2. Chọn Hàng 2</button>
-        <button onclick="adminSelectRow(2)" id="btn-admin-row-2" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">3. Chọn Hàng 3</button>
-        <button onclick="adminSelectRow(3)" id="btn-admin-row-3" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">4. Chọn Hàng 4</button>
-        <button onclick="adminSelectRow(4)" id="btn-admin-row-4" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">5. Chọn Hàng 5</button>
-        <button onclick="adminSelectRow(5)" id="btn-admin-row-5" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">6. Chọn Hàng 6</button>
-        <button onclick="adminRevealCurrentRow()" class="py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black shadow transition">
-          LẬT Ô CHỮ & CHẤM ĐIỂM
+      <!-- Chỉ định đội đang có lượt chọn hàng ngang & nút lật ô chữ -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-bold text-amber-300">Đội đang có lượt chọn hàng:</span>
+          <select id="admin-turn-selector" onchange="adminChangeSelectingTeam()" class="rounded-lg bg-slate-800 border border-slate-600 px-3 py-1.5 text-xs font-bold text-white">
+            <option value="TEAM_1">Đội 01</option>
+            <option value="TEAM_2">Đội 02</option>
+            <option value="TEAM_3">Đội 03</option>
+            <option value="TEAM_4">Đội 04</option>
+            <option value="TEAM_5">Đội 05</option>
+            <option value="TEAM_6">Đội 06</option>
+            <option value="TEAM_7">Đội 07</option>
+            <option value="TEAM_8">Đội 08</option>
+            <option value="TEAM_9">Đội 09</option>
+            <option value="TEAM_10">Đội 10</option>
+          </select>
+          <span class="text-[11px] text-slate-400">(MC cũng có thể bấm trực tiếp vào 1 trong 6 hàng bên dưới để chọn hộ đội thi)</span>
+        </div>
+
+        <button onclick="adminRevealCurrentRow()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black shadow-lg transition flex items-center gap-1.5">
+          <i data-lucide="eye" class="w-4 h-4"></i> LẬT Ô CHỮ & CHẤM ĐIỂM (+3Đ)
         </button>
       </div>
+
+      <!-- 6 nút chọn hàng dự phòng cho MC -->
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+        <button onclick="selectCrosswordRow(0)" id="btn-admin-row-0" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">Hàng 1</button>
+        <button onclick="selectCrosswordRow(1)" id="btn-admin-row-1" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">Hàng 2</button>
+        <button onclick="selectCrosswordRow(2)" id="btn-admin-row-2" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">Hàng 3</button>
+        <button onclick="selectCrosswordRow(3)" id="btn-admin-row-3" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">Hàng 4</button>
+        <button onclick="selectCrosswordRow(4)" id="btn-admin-row-4" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">Hàng 5</button>
+        <button onclick="selectCrosswordRow(5)" id="btn-admin-row-5" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition">Hàng 6</button>
+      </div>
+    </div>
+
+    <!-- THANH THÔNG BÁO LƯỢT CHỌN HÀNG CỦA ĐỘI THI -->
+    <div id="turn-announcement-bar" class="bg-gradient-to-r from-indigo-950 via-blue-900 to-indigo-950 border border-blue-500/50 rounded-2xl px-4 py-3 flex flex-wrap items-center justify-between gap-3 shadow-lg">
+      <div class="flex items-center gap-2.5">
+        <span class="w-8 h-8 rounded-xl bg-amber-500 text-slate-950 font-black flex items-center justify-center shrink-0">
+          <i data-lucide="pointer" class="w-4 h-4"></i>
+        </span>
+        <div>
+          <span class="text-[11px] uppercase font-bold text-blue-300 block">Lượt chọn hàng ngang hiện tại</span>
+          <strong id="turn-team-label" class="text-sm md:text-base text-white">Đội 01 - THPT Chuyên Lào Cai đang chọn hàng ngang...</strong>
+        </div>
+      </div>
+      <span id="turn-instruction-badge" class="px-3 py-1 rounded-lg bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold">
+        Bấm trực tiếp vào hàng ngang trên lưới ô chữ để mở câu hỏi
+      </span>
     </div>
 
     <!-- THÔNG BÁO CHUÔNG TỪ KHÓA -->
@@ -326,7 +363,7 @@
 
           <!-- Ghi chú đáp án bí mật chỉ hiện cho MC và Ban Giám Khảo -->
           <div id="secret-answer-box" class="hidden p-2.5 rounded-xl bg-amber-950/40 border border-amber-500/40 text-xs text-amber-200 flex flex-wrap items-center justify-between gap-2">
-            <span>🔐 <strong>Từ khóa Hàng Dọc (Chỉ MC & BGK thấy):</strong> <code id="secret-kw-display" class="font-black text-rose-400 text-sm">SAPA</code></span>
+            <span>🔐 <strong>Từ khóa Hàng Dọc (Chỉ MC & BGK thấy):</strong> <code id="secret-kw-display" class="font-black text-rose-400 text-sm">LAOCAI</code></span>
             <span id="secret-row-ans-display" class="text-amber-300 font-bold"></span>
           </div>
         </div>
@@ -336,7 +373,7 @@
           <div class="flex items-center justify-between gap-3">
             <div>
               <span id="active-row-label" class="px-3 py-1 rounded-lg bg-amber-500 text-slate-950 font-black text-xs uppercase">CHƯA CHỌN HÀNG NGANG</span>
-              <span id="active-row-status" class="ml-2 text-xs font-semibold text-slate-300">Bấm chọn hàng ngang trên bàn điều khiển MC (hoặc bấm trực tiếp vào số thứ tự hàng)...</span>
+              <span id="active-row-status" class="ml-2 text-xs font-semibold text-slate-300">Chờ đội thi có lượt bấm chọn hàng ngang trên lưới ô chữ...</span>
             </div>
             <div class="flex items-center gap-2 bg-slate-950 px-4 py-2 rounded-xl border border-slate-700">
               <i data-lucide="timer" class="w-5 h-5 text-amber-400"></i>
@@ -347,7 +384,7 @@
 
           <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800 min-h-[76px] flex items-center">
             <p id="active-question-text" class="text-base md:text-lg font-bold text-white leading-relaxed">
-              Vui lòng chờ Ban Tổ chức chọn hàng ngang để bắt đầu...
+              Vui lòng chờ đội thi có lượt chọn một hàng ngang để bắt đầu...
             </p>
           </div>
 
@@ -434,7 +471,7 @@
     </div>
   </div>
 
-  <!-- MODAL SOẠN BỘ ĐỀ (HỖ TRỢ CĂN CỘT DỌC TỪ KHÓA) -->
+  <!-- MODAL SOẠN BỘ ĐỀ -->
   <div id="question-editor-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-4 my-8">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -467,59 +504,58 @@
       TEAM_6: 'doi06', TEAM_7: 'doi07', TEAM_8: 'doi08', TEAM_9: 'doi09', TEAM_10: 'doi10'
     };
 
-    // 03 BỘ ĐỀ DEMO ĐƯỢC THIẾT KẾ CHUẨN Ô CHỮ HÀNG DỌC (Mỗi hàng ngang giao với 1 chữ cái của từ khóa dọc)
+    const TEAM_ORDER = ['TEAM_1','TEAM_2','TEAM_3','TEAM_4','TEAM_5','TEAM_6','TEAM_7','TEAM_8','TEAM_9','TEAM_10'];
+
     const DEMO_PRESETS = {
       THPT: {
         level: 'THPT',
         keyword: {
-          word: 'LAOCAI', // 6 chữ cái thẳng hàng dọc từ trên xuống dưới: L - A - O - C - A - I
+          word: 'LAOCAI',
           hint: 'A mountainous border province in Northwest Vietnam, home to Fansipan Peak and Sa Pa (6 letters).',
           solvedBy: null
         },
         rows: [
-          { id: 1, question: 'Row 1 (6 letters): A low area between mountains, such as Muong Hoa, famous for ancient carved rocks.', answer: 'VALLEY', keyLetterPos: 2, revealed: false }, // va[L]ley
-          { id: 2, question: 'Row 2 (4 letters): A famous misty highland town in Northwest Vietnam renowned for terraced rice fields.', answer: 'SAPA', keyLetterPos: 1, revealed: false }, // s[A]pa
-          { id: 3, question: 'Row 3 (7 letters): Colorful hand-woven traditional fabric crafted by H\'Mong and Red Dao artisans.', answer: 'BROCADE', keyLetterPos: 2, revealed: false }, // br[O]cade
-          { id: 4, question: 'Row 4 (7 letters): The shared traditions, arts, customs, and way of life of ethnic communities.', answer: 'CULTURE', keyLetterPos: 0, revealed: false }, // [C]ulture
-          { id: 5, question: 'Row 5 (8 letters): Valuable cultural traditions and natural wonders passed down from past generations.', answer: 'HERITAGE', keyLetterPos: 5, revealed: false }, // herit[A]ge
-          { id: 6, question: 'Row 6 (7 letters): A person who travels to explore cultural heritage, arts, and scenic landscapes.', answer: 'TOURIST', keyLetterPos: 4, revealed: false }  // tour[I]st
+          { id: 1, question: 'Row 1 (6 letters): A low area between mountains, such as Muong Hoa, famous for ancient carved rocks.', answer: 'VALLEY', keyLetterPos: 2, revealed: false },
+          { id: 2, question: 'Row 2 (4 letters): A famous misty highland town in Northwest Vietnam renowned for terraced rice fields.', answer: 'SAPA', keyLetterPos: 1, revealed: false },
+          { id: 3, question: 'Row 3 (7 letters): Colorful hand-woven traditional fabric crafted by H\'Mong and Red Dao artisans.', answer: 'BROCADE', keyLetterPos: 2, revealed: false },
+          { id: 4, question: 'Row 4 (7 letters): The shared traditions, arts, customs, and way of life of ethnic communities.', answer: 'CULTURE', keyLetterPos: 0, revealed: false },
+          { id: 5, question: 'Row 5 (8 letters): Valuable cultural traditions and natural wonders passed down from past generations.', answer: 'HERITAGE', keyLetterPos: 5, revealed: false },
+          { id: 6, question: 'Row 6 (7 letters): A person who travels to explore cultural heritage, arts, and scenic landscapes.', answer: 'TOURIST', keyLetterPos: 4, revealed: false }
         ]
       },
       THCS: {
         level: 'THCS',
         keyword: {
-          word: 'MARKET', // M - A - R - K - E - T (6 chữ cái thẳng hàng dọc)
+          word: 'MARKET',
           hint: 'A lively weekend highland gathering in Bac Ha or Can Cau where ethnic people trade goods and meet (6 letters).',
           solvedBy: null
         },
         rows: [
-          { id: 1, question: 'Row 1 (5 letters): A very tall natural place on Earth, like Fansipan in Hoang Lien Son range.', answer: 'MOUNT', keyLetterPos: 0, revealed: false }, // [M]ount
-          { id: 2, question: 'Row 2 (5 letters): A traditional scarf or head covering worn as part of ethnic costumes.', answer: 'SCARF', keyLetterPos: 2, revealed: false }, // sc[A]rf
-          { id: 3, question: 'Row 3 (5 letters): A special skill in making things by hand, such as weaving or silver carving.', answer: 'CRAFT', keyLetterPos: 1, revealed: false }, // c[R]aft
-          { id: 4, question: 'Row 4 (4 letters): A traditional bamboo wind instrument played by H\'Mong men during festivals.', answer: 'KHEN', keyLetterPos: 0, revealed: false }, // [K]hen
-          { id: 5, question: 'Row 5 (6 letters): A creative drawing or pattern repeated on traditional brocade costumes.', answer: 'DESIGN', keyLetterPos: 1, revealed: false }, // d[E]sign
-          { id: 6, question: 'Row 6 (5 letters): A large group of people sharing the same culture and traditions, such as H\'Mong or Tay.', answer: 'TRIBE', keyLetterPos: 0, revealed: false }  // [T]ribe
+          { id: 1, question: 'Row 1 (5 letters): A very tall natural place on Earth, like Fansipan in Hoang Lien Son range.', answer: 'MOUNT', keyLetterPos: 0, revealed: false },
+          { id: 2, question: 'Row 2 (5 letters): A traditional scarf or head covering worn as part of ethnic costumes.', answer: 'SCARF', keyLetterPos: 2, revealed: false },
+          { id: 3, question: 'Row 3 (5 letters): A special skill in making things by hand, such as weaving or silver carving.', answer: 'CRAFT', keyLetterPos: 1, revealed: false },
+          { id: 4, question: 'Row 4 (4 letters): A traditional bamboo wind instrument played by H\'Mong men during festivals.', answer: 'KHEN', keyLetterPos: 0, revealed: false },
+          { id: 5, question: 'Row 5 (6 letters): A creative drawing or pattern repeated on traditional brocade costumes.', answer: 'DESIGN', keyLetterPos: 1, revealed: false },
+          { id: 6, question: 'Row 6 (5 letters): A large group of people sharing the same culture and traditions, such as H\'Mong or Tay.', answer: 'TRIBE', keyLetterPos: 0, revealed: false }
         ]
       },
       TH: {
         level: 'TH',
         keyword: {
-          word: 'WINTER', // W - I - N - T - E - R (6 chữ cái thẳng hàng dọc)
+          word: 'WINTER',
           hint: 'The coldest season of the year when snow and frost sometimes appear on Fansipan peak (6 letters).',
           solvedBy: null
         },
         rows: [
-          { id: 1, question: 'Row 1 (4 letters): White frozen water that sometimes falls on Fansipan mountain in cold days.', answer: 'SNOW', keyLetterPos: 3, revealed: false }, // sno[W]
-          { id: 2, question: 'Row 2 (4 letters): A green or yellow plant grown on terraced fields to make our daily meals.', answer: 'RICE', keyLetterPos: 1, revealed: false }, // r[I]ce
-          { id: 3, question: 'Row 3 (4 letters): A white or grey shape floating high in the sky over Hoang Lien Son.', answer: 'CLOUD', keyLetterPos: 0, revealed: false }, // fix below -> let's use RAIN / WIND
-          { id: 4, question: 'Row 4 (4 letters): A fun trip to visit new places and learn about local culture.', answer: 'TOUR', keyLetterPos: 0, revealed: false }, // [T]our
-          { id: 5, question: 'Row 5 (4 letters): A tall plant with leaves and branches growing in the forest.', answer: 'TREE', keyLetterPos: 2, revealed: false }, // tr[E]e
-          { id: 6, question: 'Row 6 (5 letters): Long flowing water like the Red River (Song Hong) in Lao Cai.', answer: 'RIVER', keyLetterPos: 0, revealed: false }  // [R]iver
+          { id: 1, question: 'Row 1 (4 letters): White frozen water that sometimes falls on Fansipan mountain in cold days.', answer: 'SNOW', keyLetterPos: 3, revealed: false },
+          { id: 2, question: 'Row 2 (4 letters): A green or yellow plant grown on terraced fields to make our daily meals.', answer: 'RICE', keyLetterPos: 1, revealed: false },
+          { id: 3, question: 'Row 3 (4 letters): Moving air that blows strongly on the top of high mountains.', answer: 'WIND', keyLetterPos: 2, revealed: false },
+          { id: 4, question: 'Row 4 (4 letters): A fun trip to visit new places and learn about local culture.', answer: 'TOUR', keyLetterPos: 0, revealed: false },
+          { id: 5, question: 'Row 5 (4 letters): A tall plant with leaves and branches growing in the forest.', answer: 'TREE', keyLetterPos: 2, revealed: false },
+          { id: 6, question: 'Row 6 (5 letters): Long flowing water like the Red River (Song Hong) in Lao Cai.', answer: 'RIVER', keyLetterPos: 0, revealed: false }
         ]
       }
     };
-    // Đảm bảo chữ cái thứ 3 của TH là 'N' (WIND -> wi[N]d)
-    DEMO_PRESETS.TH.rows[2] = { id: 3, question: 'Row 3 (4 letters): Moving air that blows strongly on the top of high mountains.', answer: 'WIND', keyLetterPos: 2, revealed: false };
 
     function createInitialState(presetKey = 'THPT') {
       const p = JSON.parse(JSON.stringify(DEMO_PRESETS[presetKey]));
@@ -527,8 +563,9 @@
         level: p.level,
         keyword: p.keyword,
         rows: p.rows,
+        selectingTeam: 'TEAM_1', // Đội thi đang có lượt chọn hàng ngang
         activeRowIndex: -1,
-        rowStatus: 'IDLE',
+        rowStatus: 'IDLE', // IDLE | ANSWERING | LOCKED | REVEALED
         timerEndAt: 0,
         buzzer: { activeTeam: null, timestamp: 0, openedCountAtBuzz: 0 },
         teams: {
@@ -546,7 +583,7 @@
       };
     }
 
-    let matchState = JSON.parse(localStorage.getItem('lc_obstacle_vertical_v3')) || createInitialState('THPT');
+    let matchState = JSON.parse(localStorage.getItem('lc_obstacle_teamselect_v4')) || createInitialState('THPT');
     let currentUserRole = null;
     let fbDb = null;
     let uiTimerLoop = null;
@@ -567,7 +604,7 @@
       startClientClockLoop();
 
       window.addEventListener('storage', (e) => {
-        if (e.key === 'lc_obstacle_vertical_v3' && e.newValue && !fbDb) {
+        if (e.key === 'lc_obstacle_teamselect_v4' && e.newValue && !fbDb) {
           matchState = JSON.parse(e.newValue);
           renderAllUI();
         }
@@ -576,9 +613,9 @@
 
     function pushStateUpdate(newState) {
       matchState = newState;
-      localStorage.setItem('lc_obstacle_vertical_v3', JSON.stringify(matchState));
+      localStorage.setItem('lc_obstacle_teamselect_v4', JSON.stringify(matchState));
       if (fbDb) {
-        fbDb.ref('obstacle_match_vertical_2026').set(matchState);
+        fbDb.ref('obstacle_match_teamselect_2026').set(matchState);
       } else {
         renderAllUI();
       }
@@ -594,13 +631,13 @@
         try {
           if (!firebase.apps.length) firebase.initializeApp({ databaseURL: fbUrl });
           fbDb = firebase.database();
-          fbDb.ref('obstacle_match_vertical_2026').on('value', (snapshot) => {
+          fbDb.ref('obstacle_match_teamselect_2026').on('value', (snapshot) => {
             const val = snapshot.val();
             if (val) {
               matchState = val;
               renderAllUI();
             } else {
-              fbDb.ref('obstacle_match_vertical_2026').set(matchState);
+              fbDb.ref('obstacle_match_teamselect_2026').set(matchState);
             }
           });
           dot.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400';
@@ -667,6 +704,46 @@
       document.getElementById('user-role-badge').classList.add('hidden');
     }
 
+    // ==================== CHỌN HÀNG NGANG (CHO CẢ ĐỘI THI CÓ LƯỢT VÀ BAN TỔ CHỨC) ====================
+    function canCurrentUserPickRow() {
+      if (matchState.rowStatus === 'ANSWERING') return false; // Đang tính giờ thì không cho đổi hàng ngang
+      if (currentUserRole === 'ADMIN') return true; // Ban Tổ chức / MC luôn có quyền chọn hoặc chọn hộ
+      if (currentUserRole && currentUserRole === matchState.selectingTeam) return true; // Đội đang có lượt được chọn
+      return false;
+    }
+
+    function selectCrosswordRow(rowIdx) {
+      if (!canCurrentUserPickRow()) {
+        if (matchState.rowStatus === 'ANSWERING') {
+          alert('Đang trong thời gian trả lời hàng ngang hiện tại, chưa thể chọn hàng mới!');
+        } else {
+          const turnName = matchState.teams[matchState.selectingTeam]?.name || matchState.selectingTeam;
+          alert(`Hiện tại đang là lượt chọn hàng ngang của ${turnName}!`);
+        }
+        return;
+      }
+
+      if (matchState.rows[rowIdx]?.revealed) {
+        alert('Hàng ngang này đã được lật mở trước đó! Vui lòng chọn hàng ngang khác.');
+        return;
+      }
+
+      const nextState = JSON.parse(JSON.stringify(matchState));
+      const durationSec = nextState.level === 'TH' ? 30 : 20;
+      nextState.activeRowIndex = rowIdx;
+      nextState.rowStatus = 'ANSWERING';
+      nextState.timerEndAt = Date.now() + durationSec * 1000;
+
+      Object.keys(nextState.teams).forEach(k => {
+        nextState.teams[k].currentAns = '';
+        nextState.teams[k].ansTime = 0;
+      });
+      const ansInput = document.getElementById('team-answer-input');
+      if (ansInput) ansInput.value = '';
+
+      pushStateUpdate(nextState);
+    }
+
     // ==================== VẼ LƯỚI Ô CHỮ CĂN THẲNG CỘT TỪ KHÓA HÀNG DỌC ====================
     function renderVerticalCrosswordGrid() {
       const gridContainer = document.getElementById('vertical-crossword-grid');
@@ -674,8 +751,8 @@
 
       const kwClean = normalizeSpell(matchState.keyword.word);
       const kwSolved = Boolean(matchState.keyword.solvedBy);
+      const allowPick = canCurrentUserPickRow();
 
-      // Tính toán độ lệch trái/phải để tất cả các ô keyLetterPos nằm thẳng một cột dọc duy nhất!
       let maxLeft = 0;
       let maxRight = 0;
       matchState.rows.forEach((r) => {
@@ -694,32 +771,37 @@
         const kPos = Math.min(Math.max(0, r.keyLetterPos || 0), Math.max(0, cleanAns.length - 1));
         const startCol = maxLeft - kPos;
         const isCurrentSelectedRow = rowIdx === matchState.activeRowIndex;
+        const canPickThisRow = allowPick && !r.revealed;
 
         const rowLine = document.createElement('div');
-        rowLine.className = 'flex items-center gap-1.5';
-
-        // Nút số thứ tự hàng ngang ở đầu dòng (MC có thể bấm trực tiếp vào số để chọn hàng)
-        const numBtn = document.createElement('button');
-        numBtn.type = 'button';
-        if (currentUserRole === 'ADMIN') {
-          numBtn.onclick = () => adminSelectRow(rowIdx);
-          numBtn.title = `Bấm để chọn Hàng ngang ${rowIdx + 1}`;
+        rowLine.className = `flex items-center gap-1.5 rounded-xl px-1.5 py-0.5 transition ${
+          canPickThisRow ? 'cursor-pointer hover:bg-amber-500/15' : ''
+        }`;
+        if (canPickThisRow) {
+          rowLine.onclick = () => selectCrosswordRow(rowIdx);
+          rowLine.title = `Bấm để chọn Hàng ngang số ${rowIdx + 1}`;
         }
+
+        // Nút số thứ tự hàng ngang ở đầu dòng
+        const numBtn = document.createElement('span');
         numBtn.className = `w-8 h-8 rounded-lg font-black text-xs flex items-center justify-center shrink-0 transition mr-1 ${
           isCurrentSelectedRow
             ? 'bg-amber-500 text-slate-950 ring-2 ring-yellow-200 scale-110'
-            : (r.revealed ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300 border border-slate-600')
+            : (r.revealed
+                ? 'bg-emerald-600 text-white'
+                : (canPickThisRow
+                    ? 'bg-amber-500/20 text-amber-300 border-2 border-amber-400 animate-pulse'
+                    : 'bg-slate-800 text-slate-300 border border-slate-600'))
         }`;
         numBtn.innerText = rowIdx + 1;
         rowLine.appendChild(numBtn);
 
-        // Vẽ từng ô trên lưới từ cột 0 -> totalCols - 1
+        // Vẽ từng ô trên lưới
         for (let col = 0; col < totalCols; col++) {
           const charIndex = col - startCol;
           const cell = document.createElement('span');
 
           if (charIndex < 0 || charIndex >= cleanAns.length) {
-            // Ô đệm vô hình giúp cột dọc thẳng tắp
             cell.className = 'cw-cell cw-spacer';
             rowLine.appendChild(cell);
             continue;
@@ -729,9 +811,6 @@
           const charLetter = cleanAns[charIndex];
           const isCharVisible = r.revealed || (isVerticalKeyCol && kwSolved);
 
-          // Xác định lớp màu sắc theo đúng yêu cầu Ban Tổ chức:
-          // - Cột dọc từ khóa màu đỏ nổi bật riêng
-          // - Hàng đang chọn đổi màu vàng cam rực rỡ (và giao điểm cột dọc chuyển hồng ruby)
           let styleClass = 'cw-normal-hidden';
           if (isCharVisible) {
             styleClass = isVerticalKeyCol ? 'cw-vertical-revealed' : 'cw-normal-revealed';
@@ -748,7 +827,6 @@
           }
 
           cell.className = `cw-cell ${styleClass}`;
-          // Nếu từ khóa đã được giải toàn bộ nhưng hàng ngang chưa mở, vẫn hiện chữ cái ở cột dọc
           if (isVerticalKeyCol && kwSolved && !r.revealed && kwClean[rowIdx]) {
             cell.innerText = kwClean[rowIdx];
           } else {
@@ -781,19 +859,50 @@
       document.getElementById('keyword-solved-badge').classList.toggle('hidden', !kwSolved);
       document.getElementById('secret-kw-display').innerText = kwClean;
 
-      // Vẽ lại lưới ô chữ hàng dọc
+      // Cập nhật thanh thông báo đội thi đang có lượt chọn hàng ngang
+      const selTeamId = matchState.selectingTeam || 'TEAM_1';
+      const selTeamName = matchState.teams[selTeamId]?.name || selTeamId;
+      const turnLabelEl = document.getElementById('turn-team-label');
+      const turnBadgeEl = document.getElementById('turn-instruction-badge');
+
+      if (openedCount >= 6) {
+        turnLabelEl.innerText = 'ĐÃ HOÀN THÀNH CẢ 6 HÀNG NGANG!';
+        turnBadgeEl.innerText = 'Kết thúc lượt chọn hàng';
+      } else if (matchState.rowStatus === 'ANSWERING') {
+        turnLabelEl.innerText = `Đang thi Hàng ngang số 0${matchState.activeRowIndex + 1} (Do ${selTeamName} chọn)`;
+        turnBadgeEl.innerText = 'Các đội nhập đáp án trước khi hết giờ!';
+      } else {
+        turnLabelEl.innerText = `${selTeamName} đang có lượt chọn hàng ngang!`;
+        if (currentUserRole === selTeamId) {
+          turnBadgeEl.innerText = '👉 ĐẾN LƯỢT ĐỘI BẠN! Bấm vào 1 hàng ngang chưa mở để chọn';
+          turnBadgeEl.className = 'px-3 py-1 rounded-lg bg-emerald-500 text-slate-950 text-xs font-black animate-bounce';
+        } else if (currentUserRole === 'ADMIN') {
+          turnBadgeEl.innerText = 'Đội thi có thể tự bấm chọn trên máy đội (hoặc MC bấm chọn hộ)';
+          turnBadgeEl.className = 'px-3 py-1 rounded-lg bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold';
+        } else {
+          turnBadgeEl.innerText = `Đang chờ ${selTeamName} chọn hàng ngang...`;
+          turnBadgeEl.className = 'px-3 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold';
+        }
+      }
+
+      if (currentUserRole === 'ADMIN') {
+        const turnSel = document.getElementById('admin-turn-selector');
+        if (turnSel) turnSel.value = selTeamId;
+      }
+
+      // Vẽ lưới ô chữ hàng dọc
       renderVerticalCrosswordGrid();
 
-      // Cập nhật trạng thái nút chọn hàng trên bàn điều khiển MC
+      // Cập nhật 6 nút chọn hàng dự phòng của MC
       for (let i = 0; i < 6; i++) {
         const btn = document.getElementById(`btn-admin-row-${i}`);
         if (!btn) continue;
         if (i === matchState.activeRowIndex) {
-          btn.className = 'py-2.5 px-2 rounded-xl bg-amber-500 text-slate-950 border-2 border-yellow-200 text-xs font-black shadow-lg transition';
+          btn.className = 'py-2 px-2 rounded-xl bg-amber-500 text-slate-950 border-2 border-yellow-200 text-xs font-black shadow-lg transition';
         } else if (matchState.rows[i]?.revealed) {
-          btn.className = 'py-2.5 px-2 rounded-xl bg-emerald-900/60 border border-emerald-600 text-xs font-bold text-emerald-300 transition';
+          btn.className = 'py-2 px-2 rounded-xl bg-emerald-900/60 border border-emerald-600 text-xs font-bold text-emerald-300 transition';
         } else {
-          btn.className = 'py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition';
+          btn.className = 'py-2 px-2 rounded-xl bg-slate-800 hover:bg-amber-600 border border-slate-700 text-xs font-bold text-white transition';
         }
       }
 
@@ -806,14 +915,15 @@
 
         const statusMap = {
           ANSWERING: `Đang tính giờ (${matchState.level === 'TH' ? '30s' : '20s'})!`,
-          LOCKED: 'Hết giờ! Đã khóa ô nhập đáp án.',
+          LOCKED: 'Hết giờ! Đã khóa ô nhập đáp án. Chờ MC lật ô chữ.',
           REVEALED: `Đã lật ô chữ! Đáp án đúng: ${normalizeSpell(curRow.answer)}`
         };
         document.getElementById('active-row-status').innerText = statusMap[matchState.rowStatus] || '';
       } else {
         document.getElementById('active-row-label').innerText = 'CHƯA CHỌN HÀNG NGANG';
-        document.getElementById('active-question-text').innerText = 'Vui lòng chờ Ban Tổ chức chọn hàng ngang để bắt đầu...';
+        document.getElementById('active-question-text').innerText = 'Vui lòng chờ đội thi có lượt chọn một hàng ngang để bắt đầu...';
         document.getElementById('secret-row-ans-display').innerText = '';
+        document.getElementById('active-row-status').innerText = 'Bấm trực tiếp vào hàng ngang trên lưới ô chữ để mở câu hỏi.';
       }
 
       if (currentUserRole.startsWith('TEAM_')) {
@@ -867,12 +977,15 @@
       const sortedTeams = Object.entries(matchState.teams).sort((a, b) => b[1].score - a[1].score);
       sortedTeams.forEach(([tKey, tData], rank) => {
         const isMe = tKey === currentUserRole;
+        const isTurn = tKey === matchState.selectingTeam;
         sbList.innerHTML += `
           <div class="p-2.5 rounded-xl border flex items-center justify-between ${isMe ? 'bg-indigo-950 border-amber-400' : 'bg-slate-950/80 border-slate-800'}">
             <div class="flex items-center gap-2.5 min-w-0">
               <span class="w-6 h-6 rounded-full ${rank === 0 ? 'bg-amber-400 text-slate-950' : 'bg-slate-800 text-slate-300'} font-black text-xs flex items-center justify-center shrink-0">${rank + 1}</span>
               <div class="truncate">
-                <span class="text-xs font-bold text-white block truncate">${tData.name}</span>
+                <span class="text-xs font-bold text-white block truncate">
+                  ${tData.name} ${isTurn ? '<span class="text-amber-400">★</span>' : ''}
+                </span>
                 ${tData.kwLocked ? '<span class="text-[10px] text-rose-400">Hết quyền từ khóa</span>' : ''}
               </div>
             </div>
@@ -918,7 +1031,7 @@
       if (!clean) return;
 
       if (fbDb) {
-        fbDb.ref(`obstacle_match_vertical_2026/teams/${currentUserRole}`).update({ currentAns: clean, ansTime: Date.now() });
+        fbDb.ref(`obstacle_match_teamselect_2026/teams/${currentUserRole}`).update({ currentAns: clean, ansTime: Date.now() });
       } else {
         matchState.teams[currentUserRole].currentAns = clean;
         matchState.teams[currentUserRole].ansTime = Date.now();
@@ -933,7 +1046,7 @@
       const openedCount = matchState.rows.filter(r => r.revealed).length;
 
       if (fbDb) {
-        fbDb.ref('obstacle_match_vertical_2026/buzzer').transaction((cur) => {
+        fbDb.ref('obstacle_match_teamselect_2026/buzzer').transaction((cur) => {
           if (cur && cur.activeTeam) return;
           return { activeTeam: currentUserRole, timestamp: Date.now(), openedCountAtBuzz: openedCount };
         });
@@ -965,17 +1078,9 @@
       pushStateUpdate(createInitialState(presetKey));
     }
 
-    function adminSelectRow(rowIdx) {
+    function adminChangeSelectingTeam() {
       const nextState = JSON.parse(JSON.stringify(matchState));
-      const durationSec = nextState.level === 'TH' ? 30 : 20;
-      nextState.activeRowIndex = rowIdx;
-      nextState.rowStatus = 'ANSWERING';
-      nextState.timerEndAt = Date.now() + durationSec * 1000;
-      Object.keys(nextState.teams).forEach(k => {
-        nextState.teams[k].currentAns = '';
-        nextState.teams[k].ansTime = 0;
-      });
-      document.getElementById('team-answer-input').value = '';
+      nextState.selectingTeam = document.getElementById('admin-turn-selector').value;
       pushStateUpdate(nextState);
     }
 
@@ -998,7 +1103,10 @@
 
     function adminRevealCurrentRow() {
       const idx = matchState.activeRowIndex;
-      if (idx < 0) return;
+      if (idx < 0) {
+        alert('Chưa có hàng ngang nào đang được chọn!');
+        return;
+      }
       const nextState = JSON.parse(JSON.stringify(matchState));
       const row = nextState.rows[idx];
       if (row.revealed) return;
@@ -1012,6 +1120,11 @@
           nextState.teams[k].score += 3;
         }
       });
+
+      // Tự động chuyển lượt chọn hàng ngang tiếp theo sang đội kế tiếp
+      const curTurnIdx = TEAM_ORDER.indexOf(nextState.selectingTeam || 'TEAM_1');
+      nextState.selectingTeam = TEAM_ORDER[(curTurnIdx + 1) % TEAM_ORDER.length];
+
       pushStateUpdate(nextState);
     }
 
