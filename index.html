@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Obstacle Course | Học Sinh Lào Cai Giỏi Tiếng Anh 2026-2027</title>
+  <title>DEMO | Vượt Chướng Ngại Vật - Học Sinh Lào Cai Giỏi Tiếng Anh 2026-2027</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Firebase Compat SDK cho đồng bộ Real-time 10 đội thi + MC + Ban Giám Khảo -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
@@ -14,9 +13,9 @@
     body { font-family: 'Inter', sans-serif; background-color: #0b1120; color: #f8fafc; }
     .mono { font-family: 'JetBrains Mono', monospace; }
     .tile-box {
-      width: 36px; height: 42px;
+      width: 34px; height: 40px;
       display: inline-flex; align-items: center; justify-content: center;
-      font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1.15rem;
+      font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1.1rem;
       border-radius: 6px; transition: all 0.35s ease;
     }
     @media (min-width: 768px) {
@@ -24,7 +23,7 @@
     }
     .tile-hidden { background: linear-gradient(145deg, #1e3a8a, #1d4ed8); border: 2px solid #60a5fa; color: transparent; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35); }
     .tile-revealed { background: linear-gradient(145deg, #f8fafc, #e2e8f0); border: 2px solid #f59e0b; color: #0f172a; transform: rotateY(360deg); }
-    .tile-key-hint { border: 2.5px solid #f59e0b !important; box-shadow: 0 0 12px rgba(245, 158, 11, 0.6); }
+    .tile-key-hint { border: 2.5px solid #f59e0b !important; box-shadow: 0 0 12px rgba(245, 158, 11, 0.65); }
     .buzzer-btn {
       background: radial-gradient(circle at 30% 30%, #ef4444, #b91c1c 70%, #7f1d1d);
       box-shadow: 0 10px 0 #450a0a, 0 15px 25px rgba(239, 68, 68, 0.5);
@@ -41,7 +40,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- TOP STATUS BAR -->
+  <!-- THANH TRẠNG THÁI TRÊN CÙNG -->
   <header class="bg-slate-900/95 border-b border-slate-800 px-4 py-2.5 sticky top-0 z-40">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
@@ -51,15 +50,15 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-extrabold text-sm md:text-base text-white tracking-tight">PHẦN 2: VƯỢT CHƯỚNG NGẠI VẬT (OBSTACLE COURSE)</span>
-            <span class="hidden sm:inline-block px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/30 text-blue-300 text-[11px] font-bold">
-              QĐ 1226/QĐ-SGDĐT Lào Cai
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[11px] font-bold">
+              BẢN DEMO TRẢI NGHIỆM BTC
             </span>
           </div>
-          <p class="text-[11px] text-slate-400">6 Hàng ngang (3đ/câu) • 1 Từ khóa (12đ / 10đ / 8đ) • Tối đa 30 điểm</p>
+          <p class="text-[11px] text-slate-400">Chủ đề: "English - Bringing Lao Cai Cultural Heritage, Arts and Tourism to the World"</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-2.5">
+      <div class="flex items-center gap-2">
         <div id="sync-badge" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs font-semibold">
           <span id="sync-dot" class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
           <span id="sync-text" class="text-slate-300">Chế độ Offline / Cục bộ</span>
@@ -68,52 +67,63 @@
         <div id="user-role-badge" class="hidden items-center gap-2 px-3 py-1.5 rounded-lg bg-indigo-950 border border-indigo-700 text-xs font-bold text-indigo-200">
           <i data-lucide="user-check" class="w-3.5 h-3.5 text-amber-400"></i>
           <span id="current-role-label">Chưa đăng nhập</span>
-          <button onclick="logout()" class="ml-1 text-rose-400 hover:text-rose-300 underline text-[11px]">Thoát</button>
+          <button onclick="logout()" class="ml-1 text-rose-400 hover:text-rose-300 underline text-[11px]">Đổi vai trò</button>
         </div>
 
         <button onclick="openFirebaseModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs font-semibold text-amber-300 flex items-center gap-1.5 transition">
-          <i data-lucide="wifi" class="w-3.5 h-3.5"></i> Kết nối Online (Firebase)
+          <i data-lucide="wifi" class="w-3.5 h-3.5"></i> Kết nối Firebase
         </button>
       </div>
     </div>
   </header>
 
-  <!-- ==================== MÀN HÌNH ĐĂNG NHẬP PHÂN QUYỀN ==================== -->
+  <!-- ==================== MÀN HÌNH ĐĂNG NHẬP & TRẢI NGHIỆM NHANH ==================== -->
   <section id="login-screen" class="flex-1 flex items-center justify-center p-4">
-    <div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
-      <!-- Left Info -->
-      <div class="md:col-span-5 bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900 p-7 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-800">
+    <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-12 bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+      <!-- Cột trái: Nút vào trải nghiệm nhanh 1-click cho Ban Tổ chức -->
+      <div class="md:col-span-5 bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-900 p-7 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-800">
         <div class="space-y-4">
           <span class="inline-block px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-bold">
-            VÒNG CHUNG KẾT CẤP TỈNH
+            CHẾ ĐỘ DEMO TRẢI NGHIỆM NHANH
           </span>
           <h1 class="text-2xl font-black text-white leading-snug">
-            Hệ Thống Thi Vượt Chướng Ngại Vật Tiếng Anh
+            Trải Nghiệm Nhanh Cho Ban Tổ Chức (1-Click)
           </h1>
           <p class="text-xs text-blue-200 leading-relaxed">
-            Thiết kế chuẩn xác theo Điều 9, Khoản 2b Thể lệ Cuộc thi Học sinh Lào Cai giỏi tiếng Anh năm học 2026–2027:
+            Hệ thống đã nạp sẵn <strong>03 bộ đề Demo chuẩn chủ đề Lào Cai</strong> cho cả 3 cấp học (Tiểu học, THCS, THPT). Ban Tổ chức có thể bấm chọn nhanh vai trò bên dưới để thử nghiệm ngay mà không cần gõ mật khẩu:
           </p>
-          <ul class="text-xs text-slate-300 space-y-2 pt-1">
-            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✓</span> <span><strong>Cấp TH:</strong> 30 giây/hàng ngang • <strong>THCS/THPT:</strong> 20 giây/hàng ngang.</span></li>
-            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✓</span> <span><strong>Chấm chính tả tự động:</strong> Bỏ qua hoa/thường & khoảng trắng thừa; sai 1 chữ cái không tính điểm.</span></li>
-            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✓</span> <span><strong>Bấm chuông từ khóa:</strong> Ghi nhận mili-giây đội bấm sớm nhất, khóa quyền nếu trả lời sai.</span></li>
-          </ul>
+
+          <div class="space-y-2.5 pt-2">
+            <button onclick="quickDemoLogin('ADMIN')" class="w-full py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs text-left flex items-center justify-between shadow-lg transition">
+              <span>1. Vào vai MC / Ban Tổ Chức (Điều khiển đề)</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+            <button onclick="quickDemoLogin('JUDGE')" class="w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs text-left flex items-center justify-between shadow-lg transition">
+              <span>2. Vào vai Ban Giám Khảo (Chấm từ khóa)</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+            <button onclick="quickDemoLogin('TEAM_1')" class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs text-left flex items-center justify-between shadow-lg transition">
+              <span>3. Vào vai Đội Thi 01 (Nhập đáp án & Bấm chuông)</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
         </div>
-        <div class="pt-6 text-[11px] text-slate-400 border-t border-white/10 mt-6">
-          Sở Giáo dục và Đào tạo Tỉnh Lào Cai • Năm học 2026–2027
+
+        <div class="pt-5 text-[11px] text-slate-400 border-t border-white/10 mt-6">
+          Mẹo: Mở trang này trên 2 tab trình duyệt (1 tab MC, 1 tab Đội 01) để xem đồng bộ tức thì!
         </div>
       </div>
 
-      <!-- Right Login Form -->
+      <!-- Cột phải: Đăng nhập phân quyền chuẩn bằng mã PIN -->
       <div class="md:col-span-7 p-7 space-y-5">
         <div>
-          <h2 class="text-xl font-extrabold text-white">Đăng Nhập Hệ Thống Thi</h2>
-          <p class="text-xs text-slate-400 mt-1">Chọn vai trò của bạn và nhập mật khẩu phân quyền do Ban Tổ chức cấp.</p>
+          <h2 class="text-xl font-extrabold text-white">Đăng Nhập Phân Quyền Chính Thức (Có PIN)</h2>
+          <p class="text-xs text-slate-400 mt-1">Sử dụng khi tổ chức thi chính thức cho 10 đội thi.</p>
         </div>
 
         <div class="space-y-4">
           <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1.5">1. Chọn Tài Khoản / Vai Trò Tham Gia:</label>
+            <label class="block text-xs font-bold text-slate-300 mb-1.5">Chọn Tài Khoản / Vai Trò Tham Gia:</label>
             <select id="login-role-select" onchange="onRoleSelectChange()" class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3.5 py-3 text-sm font-bold text-white focus:outline-none focus:border-amber-400">
               <optgroup label="BAN TỔ CHỨC & ĐIỀU HÀNH">
                 <option value="ADMIN">Ban Tổ Chức / MC Điều Hành & Màn Hình Chiếu</option>
@@ -135,46 +145,48 @@
           </div>
 
           <div id="team-name-input-box" class="hidden">
-            <label class="block text-xs font-bold text-slate-300 mb-1.5">Tên Trường / Tên Đội Thi (Hiển thị trên bảng điểm):</label>
-            <input type="text" id="login-custom-team-name" placeholder="Ví dụ: THPT Chuyên Lào Cai / THCS Lê Quý Đôn..." class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+            <label class="block text-xs font-bold text-slate-300 mb-1.5">Tên Trường / Tên Đội Thi:</label>
+            <input type="text" id="login-custom-team-name" placeholder="Ví dụ: THPT Chuyên Lào Cai..." class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1.5">2. Mật Khẩu Phân Quyền (PIN):</label>
-            <input type="password" id="login-password-input" placeholder="Nhập mã PIN truy cập..." class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3.5 py-3 text-sm font-mono text-amber-300 focus:outline-none focus:border-amber-400">
+            <label class="block text-xs font-bold text-slate-300 mb-1.5">Mật Khẩu Phân Quyền (PIN):</label>
+            <input type="password" id="login-password-input" placeholder="Nhập mã PIN..." class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3.5 py-3 text-sm font-mono text-amber-300 focus:outline-none focus:border-amber-400">
             <div class="mt-2 p-3 rounded-xl bg-slate-800/70 border border-slate-700/80 text-[11px] text-slate-400 space-y-1">
-              <p><strong class="text-amber-300">Mã PIN mặc định để thử nghiệm:</strong></p>
               <p>• MC / Admin: <code class="text-white font-bold">btc2026</code> &nbsp;|&nbsp; Giám khảo: <code class="text-white font-bold">bgk2026</code></p>
               <p>• Đội 01 → Đội 10: <code class="text-white font-bold">doi01</code>, <code class="text-white font-bold">doi02</code> ... đến <code class="text-white font-bold">doi10</code></p>
             </div>
           </div>
 
-          <button onclick="handleLogin()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-sm shadow-lg transition flex items-center justify-center gap-2">
-            <i data-lucide="log-in" class="w-4 h-4"></i> VÀO PHÒNG THI NGAY
+          <button onclick="handleLogin()" class="w-full py-3.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-black text-sm shadow-lg transition flex items-center justify-center gap-2">
+            <i data-lucide="log-in" class="w-4 h-4"></i> ĐĂNG NHẬP BẰNG MÃ PIN
           </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== KHU VỰC THI CHÍNH (SAU KHI ĐĂNG NHẬP) ==================== -->
+  <!-- ==================== KHU VỰC THI CHÍNH ==================== -->
   <main id="arena-screen" class="hidden max-w-7xl w-full mx-auto px-4 py-5 flex-1 space-y-5">
 
     <!-- BẢNG ĐIỀU KHIỂN DÀNH RIÊNG CHO ADMIN / MC -->
     <div id="admin-control-panel" class="hidden bg-slate-900 border-2 border-amber-500/50 rounded-2xl p-4 shadow-xl space-y-4">
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2">
           <span class="px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-black text-xs uppercase">Bàn Điều Khiển MC / BTC</span>
-          <select id="admin-level-select" onchange="adminChangeLevel()" class="rounded-lg bg-slate-800 border border-slate-700 px-3 py-1.5 text-xs font-bold text-amber-300">
-            <option value="THPT">Cấp THPT (20 giây / hàng ngang)</option>
-            <option value="THCS">Cấp THCS (20 giây / hàng ngang)</option>
-            <option value="TH">Cấp Tiểu học (30 giây / hàng ngang)</option>
+          <select id="admin-demo-preset" onchange="adminLoadDemoPreset()" class="rounded-lg bg-indigo-950 border border-indigo-600 px-3 py-1.5 text-xs font-bold text-amber-300">
+            <option value="THPT">Nạp Bộ Đề Demo THPT (20s - Từ khóa: FANSIPAN)</option>
+            <option value="THCS">Nạp Bộ Đề Demo THCS (20s - Từ khóa: BROCADE)</option>
+            <option value="TH">Nạp Bộ Đề Demo Tiểu học (30s - Từ khóa: SAPA)</option>
           </select>
         </div>
 
         <div class="flex flex-wrap items-center gap-2">
-          <button onclick="openQuestionEditorModal()" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1.5">
-            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Soạn Bộ Đề (6 Hàng Ngang & Từ Khóa)
+          <button onclick="adminSimulateBots()" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold flex items-center gap-1.5" title="Giả lập 9 đội khác gửi đáp án để BTC dễ test">
+            <i data-lucide="bot" class="w-3.5 h-3.5"></i> Giả Lập 9 Đội Gửi Đáp Án (Test)
+          </button>
+          <button onclick="openQuestionEditorModal()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center gap-1.5">
+            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Soạn / Sửa Bộ Đề
           </button>
           <button onclick="adminResetAllMatch()" class="px-3 py-1.5 rounded-lg bg-rose-600/80 hover:bg-rose-600 text-white text-xs font-bold flex items-center gap-1.5">
             <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset Trận Mới
@@ -182,21 +194,21 @@
         </div>
       </div>
 
-      <!-- Flow Buttons -->
+      <!-- Các nút điều khiển 6 hàng ngang -->
       <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
-        <button onclick="adminSelectRow(0)" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">Chọn Hàng 1</button>
-        <button onclick="adminSelectRow(1)" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">Chọn Hàng 2</button>
-        <button onclick="adminSelectRow(2)" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">Chọn Hàng 3</button>
-        <button onclick="adminSelectRow(3)" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">Chọn Hàng 4</button>
-        <button onclick="adminSelectRow(4)" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">Chọn Hàng 5</button>
-        <button onclick="adminSelectRow(5)" class="py-2 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">Chọn Hàng 6</button>
-        <button onclick="adminRevealCurrentRow()" class="py-2 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black shadow transition">
-          MỞ Ô CHỮ & CHẤM ĐIỂM
+        <button onclick="adminSelectRow(0)" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">1. Mở Hàng Ngang 1</button>
+        <button onclick="adminSelectRow(1)" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">2. Mở Hàng Ngang 2</button>
+        <button onclick="adminSelectRow(2)" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">3. Mở Hàng Ngang 3</button>
+        <button onclick="adminSelectRow(3)" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">4. Mở Hàng Ngang 4</button>
+        <button onclick="adminSelectRow(4)" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">5. Mở Hàng Ngang 5</button>
+        <button onclick="adminSelectRow(5)" class="py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-blue-700 border border-slate-700 text-xs font-bold text-white transition">6. Mở Hàng Ngang 6</button>
+        <button onclick="adminRevealCurrentRow()" class="py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black shadow transition">
+          LẬT Ô CHỮ & CHẤM ĐIỂM
         </button>
       </div>
     </div>
 
-    <!-- THÔNG BÁO CHUÔNG TỪ KHÓA (HIỂN THỊ KHI CÓ ĐỘI BẤM CHUÔNG) -->
+    <!-- THÔNG BÁO CHUÔNG TỪ KHÓA -->
     <div id="buzzer-alert-banner" class="hidden bg-gradient-to-r from-rose-600 via-red-600 to-amber-600 rounded-2xl p-4 shadow-2xl border-2 border-amber-300 flex flex-wrap items-center justify-between gap-4">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-2xl bg-white text-rose-600 flex items-center justify-center font-black animate-bounce">
@@ -205,11 +217,10 @@
         <div>
           <span class="px-2.5 py-0.5 rounded bg-black/30 text-amber-200 text-xs font-bold uppercase">TÍN HIỆU BẤM CHUÔNG GIẢI TỪ KHÓA</span>
           <h3 class="text-xl font-black text-white" id="buzzer-winner-text">Đội 01 đã bấm chuông giành quyền trả lời!</h3>
-          <p class="text-xs text-rose-100" id="buzzer-meta-text">Thời điểm bấm: Sau khi mở 2 hàng ngang (Mức thưởng: 12 điểm) • Thí sinh trả lời bằng lời nói!</p>
+          <p class="text-xs text-rose-100" id="buzzer-meta-text">Thời điểm bấm: Sau khi mở 0 hàng ngang • Thí sinh trả lời bằng lời nói!</p>
         </div>
       </div>
 
-      <!-- Nút chấm của Giám Khảo / Admin -->
       <div id="judge-keyword-actions" class="hidden flex items-center gap-2.5">
         <button onclick="judgeKeywordResult(true)" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs shadow-lg flex items-center gap-1.5">
           <i data-lucide="check-circle" class="w-4 h-4"></i> CHẤM ĐÚNG TỪ KHÓA (+<span id="judge-award-pts">12</span>đ)
@@ -220,10 +231,10 @@
       </div>
     </div>
 
-    <!-- KHU VỰC HIỂN THỊ CHÍNH: Ô CHỮ + CÂU HỎI + BẢNG ĐIỂM 10 ĐỘI -->
+    <!-- KHU VỰC HIỂN THỊ CHÍNH -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
 
-      <!-- CỘT TRÁI (8 CỘT): Ô CHỮ 6 HÀNG NGANG + TỪ KHÓA + CÂU HỎI HIỆN TẠI -->
+      <!-- CỘT TRÁI (8 CỘT): TỪ KHÓA + 6 HÀNG NGANG + CÂU HỎI -->
       <div class="lg:col-span-8 space-y-5">
 
         <!-- TỪ KHÓA CHƯỚNG NGẠI VẬT -->
@@ -231,7 +242,7 @@
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2">
               <span class="px-3 py-1 rounded-lg bg-amber-500/20 border border-amber-400/40 text-amber-300 font-extrabold text-xs uppercase">
-                CHƯỚNG NGẠI VẬT (TỪ KHÓA CÓ <span id="keyword-length-badge">0</span> CHỮ CÁI)
+                TỪ KHÓA CHƯỚNG NGẠI VẬT (<span id="keyword-length-badge">0</span> CHỮ CÁI)
               </span>
               <span id="keyword-solved-badge" class="hidden px-3 py-1 rounded-lg bg-emerald-500 text-slate-950 font-black text-xs">
                 ĐÃ GIẢI THÀNH CÔNG!
@@ -243,11 +254,17 @@
           </div>
 
           <p class="text-sm text-blue-200 bg-blue-950/50 border border-blue-800/60 rounded-xl p-3">
-            <strong class="text-amber-300">Gợi ý từ khóa:</strong> <span id="keyword-hint-text">...</span>
+            <strong class="text-amber-300">Gợi ý Từ khóa (hiển thị từ đầu):</strong> <span id="keyword-hint-text">...</span>
           </p>
 
-          <!-- Các ô chữ cái của Từ khóa (mỗi hàng ngang mở lộ thêm 1 chữ cái) -->
+          <!-- Các ô chữ cái của Từ khóa -->
           <div id="keyword-tiles-container" class="flex flex-wrap items-center justify-center gap-1.5 py-2"></div>
+
+          <!-- Ghi chú đáp án bí mật chỉ hiện cho MC và Ban Giám Khảo -->
+          <div id="secret-answer-box" class="hidden p-2.5 rounded-xl bg-amber-950/40 border border-amber-500/40 text-xs text-amber-200 flex items-center justify-between">
+            <span>🔐 <strong>Đáp án Từ khóa (Chỉ MC & BGK thấy):</strong> <code id="secret-kw-display" class="font-black text-amber-300 text-sm">FANSIPAN</code></span>
+            <span id="secret-row-ans-display" class="text-slate-300"></span>
+          </div>
         </div>
 
         <!-- BẢNG 6 HÀNG NGANG -->
@@ -261,7 +278,7 @@
           <div class="flex items-center justify-between gap-3">
             <div>
               <span id="active-row-label" class="px-3 py-1 rounded-lg bg-blue-600 text-white font-black text-xs uppercase">CHƯA CHỌN HÀNG NGANG</span>
-              <span id="active-row-status" class="ml-2 text-xs font-semibold text-slate-300">Chờ MC kích hoạt câu hỏi...</span>
+              <span id="active-row-status" class="ml-2 text-xs font-semibold text-slate-300">Bấm "1. Mở Hàng Ngang 1" trên bàn điều khiển MC để bắt đầu...</span>
             </div>
             <div class="flex items-center gap-2 bg-slate-950 px-4 py-2 rounded-xl border border-slate-700">
               <i data-lucide="timer" class="w-5 h-5 text-amber-400"></i>
@@ -276,7 +293,7 @@
             </p>
           </div>
 
-          <!-- KHU VỰC NHẬP ĐÁP ÁN DÀNH CHO ĐỘI THI (TEAM 1 -> TEAM 10) -->
+          <!-- KHU VỰC NHẬP ĐÁP ÁN DÀNH CHO ĐỘI THI -->
           <div id="team-interaction-box" class="hidden pt-2 border-t border-slate-800/80 space-y-4">
             <div class="flex flex-col sm:flex-row gap-2.5">
               <input type="text" id="team-answer-input" placeholder="Nhập đáp án tiếng Anh chính xác từng chữ cái..." autocomplete="off" spellcheck="false"
@@ -322,7 +339,7 @@
         <div id="scoreboard-list" class="space-y-2"></div>
 
         <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] text-slate-400 space-y-1">
-          <p class="font-bold text-slate-300">Thang điểm chuẩn Thể lệ:</p>
+          <p class="font-bold text-slate-300">Thang điểm chuẩn Thể lệ QĐ 1226:</p>
           <p>• Mỗi hàng ngang đúng chính tả: <strong class="text-emerald-400">+3 điểm</strong> (tối đa 18đ).</p>
           <p>• Đúng Từ khóa sau hàng ngang 1, 2, 3: <strong class="text-amber-400">+12 điểm</strong>.</p>
           <p>• Đúng Từ khóa sau hàng ngang 4, 5: <strong class="text-amber-400">+10 điểm</strong>.</p>
@@ -332,7 +349,7 @@
     </div>
   </main>
 
-  <!-- MODAL CẤU HÌNH FIREBASE REALTIME DATABASE (CHO THI ONLINE / MẠNG LAN ĐA MÁY) -->
+  <!-- MODAL CẤU HÌNH FIREBASE -->
   <div id="firebase-modal" class="hidden fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -341,17 +358,14 @@
         </h3>
         <button onclick="closeFirebaseModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-
       <p class="text-xs text-slate-300 leading-relaxed">
-        Để 10 máy tính của các đội thi, máy MC và máy Ban Giám Khảo đồng bộ thời gian thực qua Internet hoặc Wi-Fi phòng thi, hãy dán đường dẫn <strong>Firebase Realtime Database URL</strong> của bạn vào bên dưới (tạo miễn phí trong 1 phút tại <a href="https://console.firebase.google.com/" target="_blank" class="text-amber-400 underline">console.firebase.google.com</a>):
+        Dán đường dẫn <strong>Firebase Realtime Database URL</strong> của bạn vào bên dưới để 10 máy tính của các đội, máy MC và máy Ban Giám Khảo đồng bộ thời gian thực qua Internet:
       </p>
-
       <div>
         <label class="block text-xs font-bold text-slate-300 mb-1">Firebase Database URL:</label>
-        <input type="text" id="input-firebase-url" placeholder="https://ten-du-an-cua-ban-default-rtdb.asia-southeast1.firebasedatabase.app"
+        <input type="text" id="input-firebase-url" placeholder="https://ten-du-an-default-rtdb.asia-southeast1.firebasedatabase.app"
           class="w-full rounded-xl bg-slate-950 border border-slate-700 px-3.5 py-2.5 text-xs font-mono text-emerald-300 focus:outline-none focus:border-amber-400">
       </div>
-
       <div class="flex justify-between items-center pt-2">
         <button onclick="clearFirebaseConfig()" class="text-xs text-rose-400 hover:underline">Ngắt kết nối (Chạy cục bộ)</button>
         <div class="flex gap-2">
@@ -362,14 +376,13 @@
     </div>
   </div>
 
-  <!-- MODAL SOẠN BỘ ĐỀ VƯỢT CHƯỚNG NGẠI VẬT (CHO ADMIN / BAN RA ĐỀ) -->
+  <!-- MODAL SOẠN BỘ ĐỀ -->
   <div id="question-editor-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-4 my-8">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
         <h3 class="font-extrabold text-base text-white">Biên Soạn Bộ Đề Vượt Chướng Ngại Vật (6 Hàng Ngang + Từ Khóa)</h3>
         <button onclick="closeQuestionEditorModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-bold text-amber-300 mb-1">Từ khóa Chướng ngại vật (Tiếng Anh):</label>
@@ -380,9 +393,7 @@
           <input type="text" id="edit-kw-hint" class="w-full rounded-xl bg-slate-950 border border-slate-700 px-3 py-2 text-sm text-white">
         </div>
       </div>
-
       <div id="edit-rows-fields" class="space-y-3 max-h-[52vh] overflow-y-auto pr-1"></div>
-
       <div class="flex justify-end gap-2 pt-3 border-t border-slate-800">
         <button onclick="closeQuestionEditorModal()" class="px-4 py-2 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300">Hủy</button>
         <button onclick="saveEditedQuestions()" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black">Lưu Bộ Đề & Áp Dụng</button>
@@ -390,9 +401,7 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT LOGIC -->
   <script>
-    // 1. MÃ PIN PHÂN QUYỀN MẶC ĐỊNH
     const ROLE_PINS = {
       ADMIN: 'btc2026',
       JUDGE: 'bgk2026',
@@ -400,75 +409,117 @@
       TEAM_6: 'doi06', TEAM_7: 'doi07', TEAM_8: 'doi08', TEAM_9: 'doi09', TEAM_10: 'doi10'
     };
 
-    // 2. DỮ LIỆU BỘ ĐỀ MẪU CHỦ ĐỀ DI SẢN, VĂN HÓA, DU LỊCH LÀO CAI
-    const defaultMatchData = {
-      level: 'THPT', // 'TH' (30s) | 'THCS' (20s) | 'THPT' (20s)
-      keyword: {
-        word: 'FANSIPAN',
-        hint: 'Known as the "Roof of Indochina", this majestic peak is the most famous natural landmark in Sa Pa, Lao Cai.',
-        solvedBy: null
+    // 03 BỘ ĐỀ DEMO CHUẨN CHỦ ĐỀ DI SẢN, VĂN HÓA, DU LỊCH LÀO CAI CHO 3 CẤP HỌC
+    const DEMO_PRESETS = {
+      THPT: {
+        level: 'THPT',
+        keyword: {
+          word: 'FANSIPAN',
+          hint: 'Known as the "Roof of Indochina" (3,143m), this majestic peak in Hoang Lien Son range is the iconic landmark of Lao Cai.',
+          solvedBy: null
+        },
+        rows: [
+          { id: 1, question: 'Row 1 (4 letters): A famous misty highland town in Lao Cai province renowned for terraced rice fields and cool climate.', answer: 'SAPA', revealLetterIndex: 0, revealed: false },
+          { id: 2, question: 'Row 2 (6 letters): A traditional Sunday highland gathering in Bac Ha or Can Cau where ethnic people trade goods and meet.', answer: 'MARKET', revealLetterIndex: 1, revealed: false },
+          { id: 3, question: 'Row 3 (6 letters): A low area between mountains, such as Muong Hoa, famous for ancient carved rocks in Lao Cai.', answer: 'VALLEY', revealLetterIndex: 2, revealed: false },
+          { id: 4, question: 'Row 4 (7 letters): Colorful hand-woven traditional fabric crafted by H\'Mong and Red Dao artisans in Lao Cai.', answer: 'BROCADE', revealLetterIndex: 3, revealed: false },
+          { id: 5, question: 'Row 5 (7 letters): A person who visits Lao Cai to explore its cultural heritage, arts, and scenic landscapes.', answer: 'TOURIST', revealLetterIndex: 5, revealed: false },
+          { id: 6, question: 'Row 6 (8 letters): Valuable cultural traditions, arts, and natural wonders passed down from past generations.', answer: 'HERITAGE', revealLetterIndex: 7, revealed: false }
+        ]
       },
-      rows: [
-        { id: 1, question: 'Row 1 (4 letters): The famous misty highland town in Lao Cai province known for terraced rice fields.', answer: 'SAPA', revealLetterIndex: 0, revealed: false },
-        { id: 2, question: 'Row 2 (6 letters): A traditional Sunday highland gathering in Lao Cai where ethnic minorities trade goods and cultural products.', answer: 'MARKET', revealLetterIndex: 1, revealed: false },
-        { id: 3, question: 'Row 3 (6 letters): A steep mountain area where Muong Hoa Valley and Hoang Lien Son range are located.', answer: 'VALLEY', revealLetterIndex: 2, revealed: false },
-        { id: 4, question: 'Row 4 (7 letters): A traditional brocade fabric handcrafted by H\'Mong and Red Dao artisans in Lao Cai.', answer: 'BROCADE', revealLetterIndex: 3, revealed: false },
-        { id: 5, question: 'Row 5 (7 letters): People who travel to Lao Cai to explore its culture, arts, and scenic beauty.', answer: 'TOURIST', revealLetterIndex: 5, revealed: false },
-        { id: 6, question: 'Row 6 (8 letters): Valuable cultural traditions, arts, and natural wonders passed down through generations.', answer: 'HERITAGE', revealLetterIndex: 7, revealed: false }
-      ],
-      activeRowIndex: -1,
-      rowStatus: 'IDLE', // 'IDLE' | 'ANSWERING' | 'LOCKED' | 'REVEALED'
-      timerEndAt: 0,
-      buzzer: {
-        activeTeam: null,
-        timestamp: 0,
-        openedCountAtBuzz: 0
+      THCS: {
+        level: 'THCS',
+        keyword: {
+          word: 'BROCADE',
+          hint: 'A traditional hand-woven textile with colorful patterns made by ethnic minority women in Sa Pa and Bac Ha (7 letters).',
+          solvedBy: null
+        },
+        rows: [
+          { id: 1, question: 'Row 1 (4 letters): A lively traditional instrument made of bamboo pipes played by H\'Mong men during festivals.', answer: 'KHEN', revealLetterIndex: 0, revealed: false },
+          { id: 2, question: 'Row 2 (5 letters): A large group of people sharing the same culture, language, and traditions, such as H\'Mong, Dao, or Tay.', answer: 'TRIBE', revealLetterIndex: 1, revealed: false },
+          { id: 3, question: 'Row 3 (5 letters): A distinctive way of weaving or decorating traditional clothes with geometric motifs.', answer: 'STYLE', revealLetterIndex: 2, revealed: false },
+          { id: 4, question: 'Row 4 (5 letters): A traditional scarf or head covering worn as part of ethnic costumes in Lao Cai.', answer: 'SCARF', revealLetterIndex: 3, revealed: false },
+          { id: 5, question: 'Row 5 (5 letters): A special skill in making things by hand, such as weaving, embroidery, or silver carving.', answer: 'CRAFT', revealLetterIndex: 4, revealed: false },
+          { id: 6, question: 'Row 6 (6 letters): A creative drawing or shape repeated on traditional costumes to tell cultural stories.', answer: 'DESIGN', revealLetterIndex: 5, revealed: false }
+        ]
       },
-      teams: {
-        TEAM_1: { name: 'Đội 01', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
-        TEAM_2: { name: 'Đội 02', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
-        TEAM_3: { name: 'Đội 03', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
-        TEAM_4: { name: 'Đội 04', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
-        TEAM_5: { name: 'Đội 05', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
-        TEAM_6: { name: 'Đội 06', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
-        TEAM_7: { name: 'Đội 07', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
-        TEAM_8: { name: 'Đội 08', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
-        TEAM_9: { name: 'Đội 09', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
-        TEAM_10: { name: 'Đội 10', score: 0, kwLocked: false, currentAns: '', ansTime: 0 }
+      TH: {
+        level: 'TH',
+        keyword: {
+          word: 'SAPA',
+          hint: 'A very famous cold and foggy mountain town in Lao Cai province where tourists love to see snow and clouds (4 letters).',
+          solvedBy: null
+        },
+        rows: [
+          { id: 1, question: 'Row 1 (4 letters): White frozen water that sometimes falls on Fansipan mountain in winter.', answer: 'SNOW', revealLetterIndex: 0, revealed: false },
+          { id: 2, question: 'Row 2 (5 letters): A very tall natural place on Earth, like Fansipan in Lao Cai.', answer: 'MOUNT', revealLetterIndex: 1, revealed: false },
+          { id: 3, question: 'Row 3 (4 letters): A green or yellow plant grown on terraced fields in Lao Cai to make our daily meals.', answer: 'RICE', revealLetterIndex: 2, revealed: false },
+          { id: 4, question: 'Row 4 (5 letters): A white or grey shape floating high in the sky over Hoang Lien Son.', answer: 'CLOUD', revealLetterIndex: 3, revealed: false },
+          { id: 5, question: 'Row 5 (5 letters): A small group of houses in the countryside, such as Cat Cat or Ta Van.', answer: 'VILLAGE', revealLetterIndex: 0, revealed: false },
+          { id: 6, question: 'Row 6 (4 letters): A fun trip to visit new places and learn about local culture.', answer: 'TOUR', revealLetterIndex: 1, revealed: false }
+        ]
       }
     };
 
-    let matchState = JSON.parse(localStorage.getItem('lc_obstacle_state_v1')) || JSON.parse(JSON.stringify(defaultMatchData));
+    function createInitialState(presetKey = 'THPT') {
+      const p = JSON.parse(JSON.stringify(DEMO_PRESETS[presetKey]));
+      return {
+        level: p.level,
+        keyword: p.keyword,
+        rows: p.rows,
+        activeRowIndex: -1,
+        rowStatus: 'IDLE',
+        timerEndAt: 0,
+        buzzer: { activeTeam: null, timestamp: 0, openedCountAtBuzz: 0 },
+        teams: {
+          TEAM_1: { name: 'Đội 01 - THPT Chuyên Lào Cai', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
+          TEAM_2: { name: 'Đội 02 - THPT Số 1 TP Lào Cai', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
+          TEAM_3: { name: 'Đội 03 - THPT Số 1 Sa Pa', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
+          TEAM_4: { name: 'Đội 04 - THPT Số 1 Bắc Hà', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
+          TEAM_5: { name: 'Đội 05 - THPT Số 1 Bảo Thắng', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
+          TEAM_6: { name: 'Đội 06 - THPT Số 1 Bát Xát', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
+          TEAM_7: { name: 'Đội 07 - THPT Số 1 Văn Bàn', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
+          TEAM_8: { name: 'Đội 08 - THPT Số 1 Mường Khương', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
+          TEAM_9: { name: 'Đội 09 - THPT Số 1 Si Ma Cai', score: 0, kwLocked: false, currentAns: '', ansTime: 0 },
+          TEAM_10: { name: 'Đội 10 - THPT DTNT Tỉnh', score: 0, kwLocked: false, currentAns: '', ansTime: 0 }
+        }
+      };
+    }
+
+    let matchState = JSON.parse(localStorage.getItem('lc_obstacle_demo_v2')) || createInitialState('THPT');
     let currentUserRole = null;
     let fbDb = null;
     let uiTimerLoop = null;
 
-    // CHUẨN HÓA ĐÁP ÁN THEO ĐÚNG THỂ LỆ:
-    // "không phân biệt chữ hoa, chữ thường và khoảng trắng; sai, thiếu, thừa chữ cái không công nhận"
     function normalizeSpell(str) {
       return (str || '').replace(/\s+/g, '').toUpperCase();
     }
 
-    // TÍNH ĐIỂM TỪ KHÓA THEO SỐ HÀNG NGANG ĐÃ MỞ TẠI THỜI ĐIỂM BẤM CHUÔNG
     function getKeywordRewardPoints(openedCount) {
       if (openedCount <= 3) return 12;
       if (openedCount <= 5) return 10;
       return 8;
     }
 
-    // KHỞI TẠO KHI LOAD TRANG
     document.addEventListener('DOMContentLoaded', () => {
       initFirebaseIfConfigured();
       if (window.lucide) lucide.createIcons();
       startClientClockLoop();
+
+      // Lắng nghe thay đổi giữa các tab trên cùng 1 máy để BTC test 2 tab mượt mà
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'lc_obstacle_demo_v2' && e.newValue && !fbDb) {
+          matchState = JSON.parse(e.newValue);
+          renderAllUI();
+        }
+      });
     });
 
-    // ĐỒNG BỘ DỮ LIỆU (FIREBASE REALTIME HOẶC LOCALSTORAGE)
     function pushStateUpdate(newState) {
       matchState = newState;
-      localStorage.setItem('lc_obstacle_state_v1', JSON.stringify(matchState));
+      localStorage.setItem('lc_obstacle_demo_v2', JSON.stringify(matchState));
       if (fbDb) {
-        fbDb.ref('obstacle_match_2026').set(matchState);
+        fbDb.ref('obstacle_match_demo_2026').set(matchState);
       } else {
         renderAllUI();
       }
@@ -482,17 +533,15 @@
 
       if (fbUrl && fbUrl.startsWith('https://')) {
         try {
-          if (!firebase.apps.length) {
-            firebase.initializeApp({ databaseURL: fbUrl });
-          }
+          if (!firebase.apps.length) firebase.initializeApp({ databaseURL: fbUrl });
           fbDb = firebase.database();
-          fbDb.ref('obstacle_match_2026').on('value', (snapshot) => {
+          fbDb.ref('obstacle_match_demo_2026').on('value', (snapshot) => {
             const val = snapshot.val();
             if (val) {
               matchState = val;
               renderAllUI();
             } else {
-              fbDb.ref('obstacle_match_2026').set(matchState);
+              fbDb.ref('obstacle_match_demo_2026').set(matchState);
             }
           });
           dot.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400';
@@ -504,16 +553,17 @@
       } else {
         fbDb = null;
         dot.className = 'w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse';
-        text.innerText = 'Chế độ Offline / Cục bộ';
+        text.innerText = 'Chế độ Offline / Cục bộ (Đồng bộ đa Tab)';
       }
     }
 
-    // XỬ LÝ ĐĂNG NHẬP PHÂN QUYỀN
     function onRoleSelectChange() {
       const role = document.getElementById('login-role-select').value;
-      const nameBox = document.getElementById('team-name-input-box');
-      if (role.startsWith('TEAM_')) nameBox.classList.remove('hidden');
-      else nameBox.classList.add('hidden');
+      document.getElementById('team-name-input-box').classList.toggle('hidden', !role.startsWith('TEAM_'));
+    }
+
+    function quickDemoLogin(role) {
+      enterArenaAs(role);
     }
 
     function handleLogin() {
@@ -523,17 +573,18 @@
         alert('Sai mật khẩu phân quyền (PIN)! Vui lòng kiểm tra lại.');
         return;
       }
-
-      currentUserRole = role;
       if (role.startsWith('TEAM_')) {
         const customName = document.getElementById('login-custom-team-name').value.trim();
         if (customName) {
           matchState.teams[role].name = customName;
-          if (fbDb) fbDb.ref(`obstacle_match_2026/teams/${role}/name`).set(customName);
-          else localStorage.setItem('lc_obstacle_state_v1', JSON.stringify(matchState));
+          pushStateUpdate(matchState);
         }
       }
+      enterArenaAs(role);
+    }
 
+    function enterArenaAs(role) {
+      currentUserRole = role;
       document.getElementById('login-screen').classList.add('hidden');
       document.getElementById('arena-screen').classList.remove('hidden');
       document.getElementById('user-role-badge').classList.remove('hidden');
@@ -542,10 +593,10 @@
       const roleName = role === 'ADMIN' ? 'MC / Ban Tổ Chức' : (role === 'JUDGE' ? 'Ban Giám Khảo' : matchState.teams[role].name);
       document.getElementById('current-role-label').innerText = roleName;
 
-      // Ẩn/hiện panel theo đúng vai trò
       document.getElementById('admin-control-panel').classList.toggle('hidden', role !== 'ADMIN');
       document.getElementById('team-interaction-box').classList.toggle('hidden', !role.startsWith('TEAM_'));
       document.getElementById('admin-answers-inspector').classList.toggle('hidden', role.startsWith('TEAM_'));
+      document.getElementById('secret-answer-box').classList.toggle('hidden', role.startsWith('TEAM_'));
 
       renderAllUI();
     }
@@ -555,10 +606,8 @@
       document.getElementById('arena-screen').classList.add('hidden');
       document.getElementById('login-screen').classList.remove('hidden');
       document.getElementById('user-role-badge').classList.add('hidden');
-      document.getElementById('login-password-input').value = '';
     }
 
-    // RENDER TOÀN BỘ GIAO DIỆN THEO TRẠNG THÁI HIỆN TẠI
     function renderAllUI() {
       if (!currentUserRole) return;
 
@@ -571,8 +620,8 @@
       document.getElementById('opened-rows-count').innerText = openedCount;
       document.getElementById('current-kw-points').innerText = `${getKeywordRewardPoints(openedCount)} điểm`;
       document.getElementById('keyword-solved-badge').classList.toggle('hidden', !kwSolved);
+      document.getElementById('secret-kw-display').innerText = kwClean;
 
-      // Xác định các chữ cái của Từ khóa đã được mở nhờ các hàng ngang
       const revealedKwIndices = new Set();
       matchState.rows.forEach(r => {
         if (r.revealed && typeof r.revealLetterIndex === 'number') {
@@ -590,7 +639,6 @@
         kwContainer.appendChild(span);
       }
 
-      // Render 6 Hàng ngang
       const rowsContainer = document.getElementById('crossword-rows-container');
       rowsContainer.innerHTML = '';
       matchState.rows.forEach((r, idx) => {
@@ -601,50 +649,47 @@
 
         let tilesHTML = '<div class="flex flex-wrap items-center gap-1">';
         for (let c = 0; c < cleanAns.length; c++) {
-          const isKeyHighlight = (c === 0); // Đánh dấu ô chữ đầu tiên hoặc ô gợi ý
           tilesHTML += `<span class="tile-box ${r.revealed ? 'tile-revealed' : 'tile-hidden'}">${r.revealed ? cleanAns[c] : ''}</span>`;
         }
         tilesHTML += '</div>';
 
+        const secretHintForAdmin = !currentUserRole.startsWith('TEAM_') ? `<span class="ml-2 text-[11px] font-mono text-amber-400/80">[Đáp án: ${cleanAns}]</span>` : '';
+
         rowDiv.innerHTML = `
           <div class="flex items-center gap-2.5">
             <span class="w-7 h-7 rounded-lg ${r.revealed ? 'bg-emerald-600' : 'bg-blue-700'} text-white font-black text-xs flex items-center justify-center">${idx + 1}</span>
-            <span class="text-xs font-bold text-slate-300">${cleanAns.length} chữ cái</span>
+            <span class="text-xs font-bold text-slate-300">${cleanAns.length} chữ cái ${secretHintForAdmin}</span>
           </div>
           ${tilesHTML}
         `;
         rowsContainer.appendChild(rowDiv);
       });
 
-      // Cập nhật khung câu hỏi hiện tại
       const activeIdx = matchState.activeRowIndex;
       if (activeIdx >= 0 && matchState.rows[activeIdx]) {
         const curRow = matchState.rows[activeIdx];
         document.getElementById('active-row-label').innerText = `HÀNG NGANG SỐ 0${activeIdx + 1}`;
         document.getElementById('active-question-text').innerText = curRow.question;
+        document.getElementById('secret-row-ans-display').innerText = `Đáp án hàng ${activeIdx + 1}: ${normalizeSpell(curRow.answer)}`;
 
         const statusMap = {
-          ANSWERING: 'Đang tính giờ làm bài!',
+          ANSWERING: `Đang tính giờ (${matchState.level === 'TH' ? '30s' : '20s'})!`,
           LOCKED: 'Hết giờ! Đã khóa ô nhập đáp án.',
-          REVEALED: `Đáp án chính xác: ${normalizeSpell(curRow.answer)}`
+          REVEALED: `Đã mở ô chữ! Đáp án đúng: ${normalizeSpell(curRow.answer)}`
         };
         document.getElementById('active-row-status').innerText = statusMap[matchState.rowStatus] || '';
       }
 
-      // Cập nhật trạng thái nhập đáp án & nút bấm chuông của Đội thi
       if (currentUserRole.startsWith('TEAM_')) {
         const myTeam = matchState.teams[currentUserRole];
         const canAnswer = matchState.rowStatus === 'ANSWERING' && Date.now() < matchState.timerEndAt;
         document.getElementById('team-answer-input').disabled = !canAnswer;
         document.getElementById('btn-submit-row-answer').disabled = !canAnswer;
 
-        if (myTeam.currentAns) {
-          document.getElementById('team-submission-feedback').innerText = `Đã ghi nhận đáp án của đội bạn: "${myTeam.currentAns}"`;
-        } else {
-          document.getElementById('team-submission-feedback').innerText = '';
-        }
+        document.getElementById('team-submission-feedback').innerText = myTeam.currentAns
+          ? `Đã ghi nhận đáp án của đội bạn: "${myTeam.currentAns}"`
+          : '';
 
-        // Nút chuông từ khóa: chỉ bật khi từ khóa chưa có người giải đúng, chưa có đội nào đang giữ chuông, và đội này chưa từng bấm sai
         const buzzerBtn = document.getElementById('btn-keyword-buzzer');
         const buzzerLocked = kwSolved || myTeam.kwLocked || Boolean(matchState.buzzer && matchState.buzzer.activeTeam);
         buzzerBtn.disabled = buzzerLocked;
@@ -653,7 +698,6 @@
         else buzzerBtn.innerText = '🔔 BẤM CHUÔNG TỪ KHÓA';
       }
 
-      // Hiển thị banner khi có đội bấm chuông
       const buzzBanner = document.getElementById('buzzer-alert-banner');
       if (matchState.buzzer && matchState.buzzer.activeTeam) {
         const bTeamId = matchState.buzzer.activeTeam;
@@ -663,12 +707,11 @@
         document.getElementById('buzzer-winner-text').innerText = `${bTeamName.toUpperCase()} ĐÃ BẤM CHUÔNG GIÀNH QUYỀN TRẢ LỜI TỪ KHÓA!`;
         document.getElementById('buzzer-meta-text').innerText = `Bấm chuông sau khi mở ${matchState.buzzer.openedCountAtBuzz} hàng ngang (Mức thưởng: ${pts} điểm) • Thí sinh trình bày bằng lời nói!`;
         document.getElementById('judge-award-pts').innerText = pts;
-        document.getElementById('judge-keyword-actions').classList.toggle('hidden', currentUserRole === 'TEAM_' + bTeamId.split('_')[1] || currentUserRole.startsWith('TEAM_'));
+        document.getElementById('judge-keyword-actions').classList.toggle('hidden', currentUserRole.startsWith('TEAM_'));
       } else {
         buzzBanner.classList.add('hidden');
       }
 
-      // Bảng tổng hợp đáp án của 10 đội cho MC / Giám khảo
       if (!currentUserRole.startsWith('TEAM_')) {
         const ansList = document.getElementById('admin-answers-list');
         ansList.innerHTML = '';
@@ -683,7 +726,6 @@
         });
       }
 
-      // Render Bảng xếp hạng 10 đội
       const sbList = document.getElementById('scoreboard-list');
       sbList.innerHTML = '';
       const sortedTeams = Object.entries(matchState.teams).sort((a, b) => b[1].score - a[1].score);
@@ -704,7 +746,6 @@
       });
     }
 
-    // ĐỒNG HỒ ĐẾM NGƯỢC TỰ ĐỘNG KHÓA KHI HẾT GIỜ
     function startClientClockLoop() {
       clearInterval(uiTimerLoop);
       uiTimerLoop = setInterval(() => {
@@ -731,22 +772,17 @@
       }, 200);
     }
 
-    // HÀNH ĐỘNG CỦA ĐỘI THI: GỬI ĐÁP ÁN HÀNG NGANG
     function submitTeamRowAnswer() {
       if (!currentUserRole || !currentUserRole.startsWith('TEAM_')) return;
       if (matchState.rowStatus !== 'ANSWERING' || Date.now() > matchState.timerEndAt) {
         alert('Đã hết thời gian trả lời hàng ngang này!');
         return;
       }
-      const raw = document.getElementById('team-answer-input').value;
-      const clean = normalizeSpell(raw);
+      const clean = normalizeSpell(document.getElementById('team-answer-input').value);
       if (!clean) return;
 
       if (fbDb) {
-        fbDb.ref(`obstacle_match_2026/teams/${currentUserRole}`).update({
-          currentAns: clean,
-          ansTime: Date.now()
-        });
+        fbDb.ref(`obstacle_match_demo_2026/teams/${currentUserRole}`).update({ currentAns: clean, ansTime: Date.now() });
       } else {
         matchState.teams[currentUserRole].currentAns = clean;
         matchState.teams[currentUserRole].ansTime = Date.now();
@@ -754,38 +790,24 @@
       }
     }
 
-    // HÀNH ĐỘNG CỦA ĐỘI THI: BẤM CHUÔNG TỪ KHÓA
     function pressKeywordBuzzer() {
       if (!currentUserRole || !currentUserRole.startsWith('TEAM_')) return;
       const myTeam = matchState.teams[currentUserRole];
       if (myTeam.kwLocked || matchState.keyword.solvedBy) return;
-
       const openedCount = matchState.rows.filter(r => r.revealed).length;
 
       if (fbDb) {
-        // Dùng Firebase Transaction để chống tranh chấp mili-giây giữa 10 đội
-        fbDb.ref('obstacle_match_2026/buzzer').transaction((currentBuzzer) => {
-          if (currentBuzzer && currentBuzzer.activeTeam) {
-            return; // Đã có đội khác bấm trước
-          }
-          return {
-            activeTeam: currentUserRole,
-            timestamp: Date.now(),
-            openedCountAtBuzz: openedCount
-          };
+        fbDb.ref('obstacle_match_demo_2026/buzzer').transaction((cur) => {
+          if (cur && cur.activeTeam) return;
+          return { activeTeam: currentUserRole, timestamp: Date.now(), openedCountAtBuzz: openedCount };
         });
       } else {
         if (matchState.buzzer && matchState.buzzer.activeTeam) return;
-        matchState.buzzer = {
-          activeTeam: currentUserRole,
-          timestamp: Date.now(),
-          openedCountAtBuzz: openedCount
-        };
+        matchState.buzzer = { activeTeam: currentUserRole, timestamp: Date.now(), openedCountAtBuzz: openedCount };
         pushStateUpdate(matchState);
       }
     }
 
-    // HÀNH ĐỘNG CỦA GIÁM KHẢO / MC: CHẤM ĐÚNG HOẶC SAI TỪ KHÓA
     function judgeKeywordResult(isCorrect) {
       if (!matchState.buzzer || !matchState.buzzer.activeTeam) return;
       const nextState = JSON.parse(JSON.stringify(matchState));
@@ -796,18 +818,16 @@
         nextState.teams[teamId].score += pts;
         nextState.keyword.solvedBy = teamId;
       } else {
-        // Sai từ khóa: mất quyền giải từ khóa, không trừ điểm, vẫn được thi các hàng ngang còn lại
         nextState.teams[teamId].kwLocked = true;
       }
       nextState.buzzer = { activeTeam: null, timestamp: 0, openedCountAtBuzz: 0 };
       pushStateUpdate(nextState);
     }
 
-    // HÀNH ĐỘNG CỦA ADMIN / MC
-    function adminChangeLevel() {
-      const nextState = JSON.parse(JSON.stringify(matchState));
-      nextState.level = document.getElementById('admin-level-select').value;
-      pushStateUpdate(nextState);
+    function adminLoadDemoPreset() {
+      const presetKey = document.getElementById('admin-demo-preset').value;
+      const fresh = createInitialState(presetKey);
+      pushStateUpdate(fresh);
     }
 
     function adminSelectRow(rowIdx) {
@@ -816,13 +836,30 @@
       nextState.activeRowIndex = rowIdx;
       nextState.rowStatus = 'ANSWERING';
       nextState.timerEndAt = Date.now() + durationSec * 1000;
-
-      // Xóa đáp án cũ của các đội cho hàng ngang mới
       Object.keys(nextState.teams).forEach(k => {
         nextState.teams[k].currentAns = '';
         nextState.teams[k].ansTime = 0;
       });
       document.getElementById('team-answer-input').value = '';
+      pushStateUpdate(nextState);
+    }
+
+    // Nút giả lập 9 đội khác gửi đáp án để BTC dễ test tính năng chấm điểm tự động
+    function adminSimulateBots() {
+      const idx = matchState.activeRowIndex;
+      if (idx < 0) {
+        alert('Vui lòng bấm "Mở Hàng Ngang 1..6" trước rồi mới giả lập đáp án các đội!');
+        return;
+      }
+      const nextState = JSON.parse(JSON.stringify(matchState));
+      const correctAns = normalizeSpell(nextState.rows[idx].answer);
+      const wrongSamples = ['LAOCAI', 'TOURISM', 'CULTURE', 'WRONG', 'MOUNTAIN'];
+
+      ['TEAM_2','TEAM_3','TEAM_4','TEAM_5','TEAM_6','TEAM_7','TEAM_8','TEAM_9','TEAM_10'].forEach((tKey, i) => {
+        // Cho khoảng 6 đội trả lời đúng, 3 đội trả lời sai chính tả để kiểm chứng bộ chấm tự động
+        nextState.teams[tKey].currentAns = (i % 3 === 0) ? wrongSamples[i % wrongSamples.length] : correctAns;
+        nextState.teams[tKey].ansTime = Date.now();
+      });
       pushStateUpdate(nextState);
     }
 
@@ -837,7 +874,6 @@
       nextState.rowStatus = 'REVEALED';
       const targetAns = normalizeSpell(row.answer);
 
-      // Tự động cộng +3 điểm cho mọi đội gõ đúng chính tả 100%
       Object.keys(nextState.teams).forEach(k => {
         if (normalizeSpell(nextState.teams[k].currentAns) === targetAns) {
           nextState.teams[k].score += 3;
@@ -847,23 +883,14 @@
     }
 
     function adminResetAllMatch() {
-      if (!confirm('Reset toàn bộ điểm số, ô chữ và trạng thái chuông của 10 đội về 0?')) return;
-      const fresh = JSON.parse(JSON.stringify(defaultMatchData));
-      fresh.keyword.word = matchState.keyword.word;
-      fresh.keyword.hint = matchState.keyword.hint;
-      fresh.rows = matchState.rows.map(r => ({ ...r, revealed: false }));
-      Object.keys(matchState.teams).forEach(k => {
-        fresh.teams[k].name = matchState.teams[k].name;
-      });
-      pushStateUpdate(fresh);
+      const presetKey = document.getElementById('admin-demo-preset')?.value || 'THPT';
+      pushStateUpdate(createInitialState(presetKey));
     }
 
-    // MODAL CẤU HÌNH FIREBASE
     function openFirebaseModal() { document.getElementById('firebase-modal').classList.remove('hidden'); }
     function closeFirebaseModal() { document.getElementById('firebase-modal').classList.add('hidden'); }
     function saveFirebaseConfig() {
-      const url = document.getElementById('input-firebase-url').value.trim();
-      localStorage.setItem('lc_firebase_url', url);
+      localStorage.setItem('lc_firebase_url', document.getElementById('input-firebase-url').value.trim());
       initFirebaseIfConfigured();
       closeFirebaseModal();
     }
@@ -874,7 +901,6 @@
       closeFirebaseModal();
     }
 
-    // MODAL SOẠN BỘ ĐỀ 6 HÀNG NGANG & TỪ KHÓA
     function openQuestionEditorModal() {
       document.getElementById('edit-kw-word').value = matchState.keyword.word;
       document.getElementById('edit-kw-hint').value = matchState.keyword.hint;
@@ -890,8 +916,8 @@
                 <input type="number" min="1" max="20" id="edit-row-kidx-${idx}" value="${(r.revealLetterIndex ?? idx) + 1}" class="w-14 rounded bg-slate-900 border border-slate-700 px-2 py-1 text-xs text-center text-amber-300 font-bold">
               </div>
             </div>
-            <input type="text" id="edit-row-q-${idx}" value="${r.question.replace(/"/g, '&quot;')}" placeholder="Câu hỏi gợi ý hàng ngang..." class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs text-white">
-            <input type="text" id="edit-row-a-${idx}" value="${r.answer}" placeholder="Đáp án tiếng Anh (không dấu cách)..." class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs mono font-bold text-emerald-400 uppercase">
+            <input type="text" id="edit-row-q-${idx}" value="${r.question.replace(/"/g, '&quot;')}" class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs text-white">
+            <input type="text" id="edit-row-a-${idx}" value="${r.answer}" class="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs mono font-bold text-emerald-400 uppercase">
           </div>
         `;
       });
@@ -910,7 +936,6 @@
       });
       pushStateUpdate(nextState);
       closeQuestionEditorModal();
-      alert('Đã cập nhật bộ đề mới cho toàn bộ 10 đội thi!');
     }
   </script>
 </body>
